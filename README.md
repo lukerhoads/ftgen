@@ -1,6 +1,6 @@
 # `ftgen`
 
-A program made in Haskell that helps you generate file trees. 
+A program made in Haskell that helps you generate file trees. Practically identical to `tree` but has customizable file icons and sorting.
 
 ```
 📁 ftgen
