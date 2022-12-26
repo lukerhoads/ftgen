@@ -28,6 +28,9 @@ main = execute =<< execParser opts
      <> progDesc "Generate a file tree"
      <> header "ftgen - a file tree generator" ) 
 
+defaultIgnoreFiles :: [String] 
+defaultIgnoreFiles = [".git"]
+
 transformArgs :: CliArgs -> IO Args 
 transformArgs cliArgs = do 
     newFiles <- if (ignoreFile cliArgs) /= "" 
@@ -35,7 +38,7 @@ transformArgs cliArgs = do
             contents <- readFile $ ignoreFile cliArgs 
             return $ lines contents
         else return [] 
-    return (Args (not $ noSortByFolder cliArgs) (not $ noSortByName cliArgs) (noToplevel cliArgs) newFiles)
+    return (Args (not $ noSortByFolder cliArgs) (not $ noSortByName cliArgs) (noToplevel cliArgs) (defaultIgnoreFiles ++ newFiles))
 
 execute :: CliArgs -> IO ()
 execute args = do 
